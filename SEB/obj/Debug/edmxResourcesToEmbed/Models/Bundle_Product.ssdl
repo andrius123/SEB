@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Bundle_product_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SEBSQL.dbo.vwBundle_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwBundle_Product">
+    <Key>
+      <PropertyRef Name="BundleID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="BundleID" Type="smallint" Nullable="false" />
+    <Property Name="Bundle" Type="varchar" MaxLength="50" />
+    <Property Name="ProductID" Type="smallint" Nullable="false" />
+    <Property Name="Product" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="Bundle_product_ModelStoreContainer">
+    <EntitySet Name="vwBundle_Product" EntityType="Self.vwBundle_Product" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwBundle_Product].[BundleID] AS [BundleID], 
+    [vwBundle_Product].[Bundle] AS [Bundle], 
+    [vwBundle_Product].[ProductID] AS [ProductID], 
+    [vwBundle_Product].[Product] AS [Product]
+    FROM [dbo].[vwBundle_Product] AS [vwBundle_Product]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

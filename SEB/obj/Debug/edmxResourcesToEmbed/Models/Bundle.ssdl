@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BundleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bundle">
+    <Key>
+      <PropertyRef Name="BundleID" />
+    </Key>
+    <Property Name="BundleID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Rules" Type="varchar" MaxLength="255" />
+    <Property Name="Value" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Bundle_Products">
+    <Key>
+      <PropertyRef Name="BundleID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="BundleID" Type="smallint" Nullable="false" />
+    <Property Name="ProductID" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Rules" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_Bundle_Bundle">
+    <End Role="Bundle" Type="Self.Bundle" Multiplicity="1" />
+    <End Role="Bundle1" Type="Self.Bundle" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Bundle">
+        <PropertyRef Name="BundleID" />
+      </Principal>
+      <Dependent Role="Bundle1">
+        <PropertyRef Name="BundleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bundle_Products_Bundle">
+    <End Role="Bundle" Type="Self.Bundle" Multiplicity="1" />
+    <End Role="Bundle_Products" Type="Self.Bundle_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bundle">
+        <PropertyRef Name="BundleID" />
+      </Principal>
+      <Dependent Role="Bundle_Products">
+        <PropertyRef Name="BundleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bundle_Products_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Bundle_Products" Type="Self.Bundle_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Bundle_Products">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BundleModelStoreContainer">
+    <EntitySet Name="Bundle" EntityType="Self.Bundle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bundle_Products" EntityType="Self.Bundle_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bundle_Bundle" Association="Self.FK_Bundle_Bundle">
+      <End Role="Bundle" EntitySet="Bundle" />
+      <End Role="Bundle1" EntitySet="Bundle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bundle_Products_Bundle" Association="Self.FK_Bundle_Products_Bundle">
+      <End Role="Bundle" EntitySet="Bundle" />
+      <End Role="Bundle_Products" EntitySet="Bundle_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bundle_Products_Product" Association="Self.FK_Bundle_Products_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Bundle_Products" EntitySet="Bundle_Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

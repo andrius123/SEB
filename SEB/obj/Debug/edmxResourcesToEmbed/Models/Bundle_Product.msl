@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Bundle_product_ModelStoreContainer" CdmEntityContainer="SEBSQLEntities">
+    <EntitySetMapping Name="vwBundle_Product">
+      <EntityTypeMapping TypeName="Bundle_product_Model.vwBundle_Product">
+        <MappingFragment StoreEntitySet="vwBundle_Product">
+          <ScalarProperty Name="BundleID" ColumnName="BundleID" />
+          <ScalarProperty Name="Bundle" ColumnName="Bundle" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BundleModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Bundle">
+      <EntityTypeMapping TypeName="BundleModel.Bundle">
+        <MappingFragment StoreEntitySet="Bundle">
+          <ScalarProperty Name="BundleID" ColumnName="BundleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rules" ColumnName="Rules" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="BundleModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rules" ColumnName="Rules" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Bundle_Products" TypeName="BundleModel.Bundle_Products" StoreEntitySet="Bundle_Products">
+      <EndProperty Name="Bundle">
+        <ScalarProperty Name="BundleID" ColumnName="BundleID" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

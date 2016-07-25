@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BundleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bundle">
+    <Key>
+      <PropertyRef Name="BundleID" />
+    </Key>
+    <Property Name="BundleID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rules" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Value" Type="Int16" />
+    <NavigationProperty Name="Bundle1" Relationship="Self.FK_Bundle_Bundle" FromRole="Bundle" ToRole="Bundle1" />
+    <NavigationProperty Name="Bundle2" Relationship="Self.FK_Bundle_Bundle" FromRole="Bundle1" ToRole="Bundle" />
+    <NavigationProperty Name="Product" Relationship="Self.Bundle_Products" FromRole="Bundle" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rules" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Bundle" Relationship="Self.Bundle_Products" FromRole="Product" ToRole="Bundle" />
+  </EntityType>
+  <Association Name="FK_Bundle_Bundle">
+    <End Role="Bundle" Type="Self.Bundle" Multiplicity="1" />
+    <End Role="Bundle1" Type="Self.Bundle" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Bundle">
+        <PropertyRef Name="BundleID" />
+      </Principal>
+      <Dependent Role="Bundle1">
+        <PropertyRef Name="BundleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Bundle_Products">
+    <End Role="Bundle" Type="Self.Bundle" Multiplicity="*" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bundle" EntityType="Self.Bundle" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <AssociationSet Name="FK_Bundle_Bundle" Association="Self.FK_Bundle_Bundle">
+      <End Role="Bundle" EntitySet="Bundle" />
+      <End Role="Bundle1" EntitySet="Bundle" />
+    </AssociationSet>
+    <AssociationSet Name="Bundle_Products" Association="Self.Bundle_Products">
+      <End Role="Bundle" EntitySet="Bundle" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
